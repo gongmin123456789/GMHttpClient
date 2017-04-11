@@ -3,6 +3,7 @@
     package="com.gm.a80066158.gmhttpclienttest">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"

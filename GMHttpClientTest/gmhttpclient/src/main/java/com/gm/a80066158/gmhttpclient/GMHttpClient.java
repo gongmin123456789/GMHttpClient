@@ -3,6 +3,7 @@ package com.gm.a80066158.gmhttpclient;
 import android.renderscript.ScriptGroup;
 import android.util.Log;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -82,14 +83,13 @@ public class GMHttpClient {
             public void onResponse(Call call, Response response) throws IOException {
                 Log.i(TAG, "<onResponse> url = " + url + ", savePath = " + savePath);
                 InputStream inputStream = response.body().byteStream();
-                OutputStream outputStream = new FileOutputStream(savePath);
+                File file = new File(savePath);
+                OutputStream outputStream = new FileOutputStream(file);
                 byte[] buffer = new byte[DOWNLOAD_FILE_BUF_LEN];
                 int readLen = 0;
-                int totalReadLen = 0;
                 do {
-                    readLen = inputStream.read(buffer, totalReadLen, DOWNLOAD_FILE_BUF_LEN);
+                    readLen = inputStream.read(buffer, 0, DOWNLOAD_FILE_BUF_LEN);
                     if (readLen > 0) {
-                        totalReadLen += readLen;
                         outputStream.write(buffer, 0, readLen);
                     } else {
                         break;
